@@ -1,0 +1,87 @@
+<script>
+function listarMedicamentos(){
+    $('#modalChooseMedicamentos').modal('show');
+    url = '{% url 'api_obtener_medicamentos' %}'
+    $.ajax({
+        url:url,
+        type: "GET",
+        dataType: "json"
+    }).done(function(medicamentos){
+        var filas = $('#modalChooseMedicamentosBodyTable');
+        filas.empty();
+        $.each(medicamentos, function(key, medicamentos){
+            console.log(medicamentos.id_medicamento)
+            filas.append('<tr onclick="seleccionarMedicamento('+medicamentos.id_medicamento+')">'+
+            '<td>'+medicamentos.nombre+'</td>'+
+            '<td>'+medicamentos.precio+'</td>'+
+            '</tr>');
+        });
+    }).fail(function(){
+        console.log("error");
+    }).always(function(){
+        console.log("complete");
+    });
+}
+
+
+function seleccionarMedicamento(id){
+    var filas = $('div#lineaDeVenta')
+    $('#modalChooseMedicamentos').modal('hide');
+    url = "{% url 'api_seleccionar_medicamento' %}";
+
+    $.ajax({
+        url: url,
+        type: "GET",
+        data: {"id":id},
+    }).done(function(medicamento){
+        var filas = $('#lineaDeVenta');
+        $.each(medicamento, function(key, medicamento){
+            console.log(medicamento.id_medicamento)
+            filas.append('<tr id="'+ medicamento.id_medicamento +'">'+
+            '<td>'+medicamento.nombre+'</td>'+
+            '<td id="precioUnitario">'+parseFloat(medicamento.precio)+'</td>'+
+            '<td id="cantidad">1</input></td>'+
+            '<td id="descuento" value="">'+'0'+'</td>'+
+            '<td id="subtotal" class="subtotal" value=""></td>'+
+            '<td class="btn btn-danger btn-sm" onclick="eliminarMedicamento('+ medicamento.id_medicamento +')">Eliminar</td>'+
+            '</tr>');
+        });
+    }).fail(function(){
+        console.log("error");
+    }).always(function(){
+        console.log("complete");
+        calcular();
+    });    
+}
+
+function calcular(){
+
+    var sum = 0.0;
+    $('#tablaVentas > tbody  > tr').each(function () {
+        var qty = 1;
+        // Fix: price is in text, not in a form field
+        // and it must be cleaned from the pound sign
+        var price = $(this).find('#precioUnitario').text().replace(/[^\d.]/, '');
+        var amount = (qty * price);
+        sum += amount;
+        $(this).find('#subtotal').text(amount.toFixed(2));
+    });
+
+    //just update the total to sum
+    $('#tablaVentas > tfoot > tr > td.totalVenta').text(sum.toFixed(2));
+    
+}
+
+function eliminarMedicamento(id){
+    var fila = $("#"+id);
+    fila.remove();
+    calcular();
+}
+
+function clearTablaMedicamentos(){
+    tabla = $('#tablaVentas > tbody#lineaDeVenta > tr');
+    tabla.remove();
+    total = $('#tablaVentas > tfoot > tr > td.totalVenta');
+    total.child().remove();
+}
+</script>

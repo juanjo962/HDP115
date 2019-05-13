@@ -1,0 +1,79 @@
+{% extends "base/base.html" %}
+
+{# Para toda plantilla a heredar lo haran desde base/base.html y agregaran los bloques 
+	title # Para el Titulo de la pagina web
+	breadcrumbs # Para la navegacion del sitio
+	content # Para el html de la pagina a crear
+ #}
+{% block title %}
+	Aplicacion Farmacia
+{% endblock title %}
+
+{% block breadcrumbs %}
+	
+    <ul class="breadcrumb">
+        <li><a href="{% url 'farmacia_index' %}">Inicio</a></li>
+        <li class="active"><a>Farmacia</a></li>
+    </ul>
+{% endblock breadcrumbs %}
+
+{% block content %}
+	<div class="container-fluid">
+		<div class="row">
+			<h1><b>Bienvenidos Farmacia HDP115</b></h1> <br><br>
+			{% if not request.user.is_authenticated %}
+			<div class="col-md-offset-2 col-md-4">
+				<p>Primero debes iniciar sesion:</p>
+				<a href="{% url 'login' %}" class="btn btn-success">Iniciar Sesion</a>
+			</div>
+			{% endif %}
+			{% if  request.user.is_authenticated %}
+			{% if kardex %}
+
+			<div class="col-sm-12"><table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                <thead>
+                <tr role="row">
+					<th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
+						ID Transaccion
+					</th>
+					<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">
+						Cantidad
+					</th>
+					<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">
+						Precio
+					</th>
+					<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">
+						Medicamento
+					</th>
+					<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">
+						Accion
+					</th>
+					
+				</tr>
+                </thead>
+                <tbody>        
+					{% for kard in kardex %}
+                	<tr role="row" class="odd">
+					
+                  		<td class="sorting_1"> {{ kard.id_transaccion }} </td>
+						<td> {{ kard.cantidad }} </td>
+						<td> {{ kard.precio_unitario }} </td>
+						<td> {{ kard.id_medic }} </td>
+						<td> {{ kard.id_ope }} </td>
+					
+					</tr>
+					{% endfor %}
+				</tbody>
+                <tfoot>
+                
+                </tfoot>
+              </table></div>
+			  {% else %}
+			  	<p>No se tienen registros en el Kardex</p>
+
+			  {% endif %}
+			{% endif %}
+			
+		</div>
+	</div>
+{% endblock content %}
