@@ -27,18 +27,27 @@ Cree un nuevo Medicamento
         <div class="col-md-offset-2 col-md-6"><br><br>
             <form action="" method="POST">
                 {% csrf_token %}
+
                 {% comment %} {{form.tipo.errors}}
                 <label for="" class="">{{form.tipo.label}}</label>
                 {{form.tipo.widget}} {% endcomment %}
+
                 {{form.nombre.errors}}
                 <label for="">{{ form.nombre.label }}</label>
                 {{form.nombre}}
+
+                {{form.existencia.errors}}
+                <label for="">{{ form.existencia.label }}</label>
+                {{form.existencia}}
+
                 {{form.precio.errors}}
                 <label for="">{{ form.precio.label }}</label>
                 {{form.precio}}
+
                 {{form.id_presentacion.errors}}
                 <label for="">{{ form.id_presentacion.label }}</label>
                 {{form.id_presentacion}}
+
                 {{form.id_tipo.errors}}
                 <label for="">{{ form.id_tipo.label }}</label>
                 {{form.id_tipo}}

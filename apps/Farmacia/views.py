@@ -35,14 +35,14 @@ User = get_user_model()
 # Create your views here.
 
 
-def crearAdministrador():
-    USER="admin"
-    PASS="123456"
-    MAIL="admin@gmail.com"
-    if User.objects.filter(username=USER).count()==0:
-        if User.objects.filter(is_superuser=1).count()==0:
-            superuser=User.objects.create_superuser(username=USER,email=MAIL,password=PASS)
-            superuser.save()
+
+USER="admin"
+PASS="123456"
+MAIL="admin@gmail.com"
+if User.objects.filter(username=USER).count()==0:
+    if User.objects.filter(is_superuser=1).count()==0:
+        superuser=User.objects.create_superuser(username=USER,email=MAIL,password=PASS)
+        superuser.save()
 
 
 def FarmaciaIndex(request):

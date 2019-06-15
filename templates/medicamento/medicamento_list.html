@@ -31,6 +31,7 @@ Puede gestionar los medicamentos registrados aqui
                     <tr>
                         <th class="col">Nombre</th>
                         <th class="col">Precio</th>
+                        <th class="col">Existencia</th>
                         <th class="col">Presentacion</th>
                         <th class="col">Tipo</th>
                         <th class="col">Acciones</th>
@@ -41,6 +42,7 @@ Puede gestionar los medicamentos registrados aqui
                     <tr>
                         <td>{{medicamento.nombre}}</td>
                         <td>{{medicamento.precio|floatformat:"2"}}</td>
+                        <td>{{medicamento.existencia}}</td>
                         <td>{{medicamento.id_presentacion}}</td>
                         <td>{{medicamento.id_tipo}}</td>                        
                         <td>
