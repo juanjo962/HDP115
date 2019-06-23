@@ -41,6 +41,7 @@ Realice procesos de venta
                     <th>Medicamento</th>
                     <th>Precio Unitario</th>
                     <th>Cantidad</th>
+                    <th>Descuento</th>
                     <th>Subtotal</th>
                     <th>Acciones</th>
                 </tr>
@@ -52,19 +53,21 @@ Realice procesos de venta
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td><label for="" class="form-group">Total Venta</label></td>
+                        <td><label for="" class="form-group">Total Venta:</label></td>
                         <td class="totalVenta"></td>
                     </tr>
                 </tfoot>
         </table>
         <div class="row">
             <div class="col-md-3">
-                <button type="button" name="guardarVenta" id="guardarVenta" class="btn btn-success">Guardar Venta</button>
+                <button type="button" name="guardarVenta" id="guardarVenta" class="btn btn-success" onclick="actualizarinventario()">Guardar Venta</button>
                 {% comment %} <button type="button" name="limpiarTabla" id="limpiarTabla" class="btn btn-danger" onclick="clearTablaMedicamentos();">Limpiar</button> {% endcomment %}
             </div>
         </div>
     </div>
 </div>
+
+
 
 <div class="container">
     <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalChooseMedicamentos" id="modalChooseMedicamentos">
@@ -94,7 +97,36 @@ Realice procesos de venta
         </div>
     </div>
 </div>
+
+
+ 
+<p id="pa"></p>
+
 {% endblock content %}
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 {% block extra_foot %}
 {% include "facturacion/fpartes/script_set_data.html" %}

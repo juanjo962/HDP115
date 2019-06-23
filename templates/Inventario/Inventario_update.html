@@ -1,43 +1,50 @@
 {% extends "base/base.html" %}
 
 {% block title %}
-Crear nuevo Medicamento
+Editar Medicamento
 {% endblock title %}
 
 {% block page_name %}
-Crear nuevo Medicamento
+Editar Existencias
 {% endblock page_name  %} 
 
 {% block page_description %}
-Cree un nuevo Medicamento
+Edite el medicamento seleccionado
 {% endblock page_description %}
 
 {% block breadcrumbs %}
     <ul class="breadcrumb">
         <li><a href="{% url 'farmacia_index' %}">Inicio</a></li>
         <li><a>Farmacia</a></li>
-        <li><a href="{% url 'medicamento_list' %}">Medicamentos</a></li>
-        <li class="active"><a>Crear Medicamento</a></li>
+        <li><a href="{% url 'Inventario_list' %}" >Inventario</a></li>
+        <li class="active"><a>Editar Existencias</a></li>
     </ul>
 {% endblock breadcrumbs %}
 
 {% block content %}
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-offset-2 col-md-6"><br><br>
+        <div class="col-md-offset-2 col-md-5"><br><br>
+            
             <form action="" method="POST">
                 {% csrf_token %}
-
+                
                 {% comment %} {{form.tipo.errors}}
                 <label for="" class="">{{form.tipo.label}}</label>
                 {{form.tipo.widget}} {% endcomment %}
-
+                
                 {{form.nombre.errors}}
                 <label for="">{{ form.nombre.label }}</label>
-                {{form.nombre}}         
+                {{form.nombre}}
+
                 {{form.precio.errors}}
-                <label for="">{{ form.precio.label }}</label>
+                <label for="">{{ form.precio.label }}</label>                
                 {{form.precio}}
+
+                {{form.existencia.errors}}
+                <label for="">{{ form.existencia.label }}</label>
+                {{form.existencia}}
+   
                 {{form.id_presentacion.errors}}
                 <label for="">{{ form.id_presentacion.label }}</label>
                 {{form.id_presentacion}}
@@ -47,8 +54,8 @@ Cree un nuevo Medicamento
                 {{form.id_tipo}}
                 
                 <br>
-                <input class="btn btn-success col-md-5" type="submit" value="Crear"/> 
-                <a href="{% url 'medicamento_list' %}" class="btn btn-info pull-right col-md-5">Regresar al listado</a>
+                <input class="btn btn-success col-md-5" type="submit" value="Guardar Cambios"/> 
+                <a href="{% url 'Inventario_list' %}" class="btn btn-info pull-right col-md-5">Regresar al listado</a>
             </form>
         </div>
     </div>    

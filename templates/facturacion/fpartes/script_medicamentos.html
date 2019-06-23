@@ -1,7 +1,7 @@
 <script>
 function listarMedicamentos(){
     $('#modalChooseMedicamentos').modal('show');
-    url = '{% url 'api_obtener_medicamentos' %}'
+    url = "{% url 'api_obtener_medicamentos' %}"
     $.ajax({
         url:url,
         type: "GET",
@@ -25,10 +25,9 @@ function listarMedicamentos(){
 
 
 function seleccionarMedicamento(id){
-    var filas = $('div#lineaDeVenta')
+    var filas = $('#lineaDeVenta')
     $('#modalChooseMedicamentos').modal('hide');
     url = "{% url 'api_seleccionar_medicamento' %}";
-
     $.ajax({
         url: url,
         type: "GET",
@@ -40,9 +39,12 @@ function seleccionarMedicamento(id){
             filas.append('<tr id="'+ medicamento.id_medicamento +'">'+
             '<td>'+medicamento.nombre+'</td>'+
             '<td id="precioUnitario">'+parseFloat(medicamento.precio)+'</td>'+
-            '<td id="cantidad">1</input></td>'+
+
+            //arreglar parametro de id
+            '<td id="cantidad"><input style="width: 50px" id="canti'+medicamento.id_medicamento+'"  type="number" value="1" oninput="calcular('+medicamento.id_medicamento+')" pattern="^[0-9]+" min="1"></td>'+
+
             '<td id="descuento" value="">'+'0'+'</td>'+
-            '<td id="subtotal" class="subtotal" value=""></td>'+
+            '<td id="subtotal'+medicamento.id_medicamento+'" class="subtotal"></td>'+
             '<td class="btn btn-danger btn-sm" onclick="eliminarMedicamento('+ medicamento.id_medicamento +')">Eliminar</td>'+
             '</tr>');
         });
@@ -54,23 +56,22 @@ function seleccionarMedicamento(id){
     });    
 }
 
-function calcular(){
-
+function calcular(elemento){
     var sum = 0.0;
     $('#tablaVentas > tbody  > tr').each(function () {
-        var qty = 1;
-        // Fix: price is in text, not in a form field
-        // and it must be cleaned from the pound sign
+        var qty = parseInt(document.getElementById("canti"+elemento).value);
         var price = $(this).find('#precioUnitario').text().replace(/[^\d.]/, '');
         var amount = (qty * price);
         sum += amount;
-        $(this).find('#subtotal').text(amount.toFixed(2));
+        $(this).find('#subtotal'+elemento).text(amount.toFixed(2));   
     });
-
+  
     //just update the total to sum
+    //Corregir suma total
     $('#tablaVentas > tfoot > tr > td.totalVenta').text(sum.toFixed(2));
     
 }
+
 
 function eliminarMedicamento(id){
     var fila = $("#"+id);

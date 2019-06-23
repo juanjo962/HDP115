@@ -16,11 +16,11 @@ Puede ver detalles del medicamento seleccionado
     <ul class="breadcrumb">
         <li><a href="{% url 'farmacia_index' %}">Inicio</a></li>
         <li><a>Farmacia</a></li>
-        <li><a href="{% url 'medicamento_list' %}">Medicamentos</a></li>
+        <li><a href="{% url 'Inventario_list' %}">Inventario</a></li>
         <li><a>Detalles de Medicamento</a></li>
     </ul>
 {% endblock breadcrumbs %}
- 
+
 {% block content %}
 <div class="container-fluid">
     <div class="row">
@@ -51,7 +51,7 @@ Puede ver detalles del medicamento seleccionado
                         </tr>
                     </tbody>
                 </table>
-                <a href="{% url 'medicamento_list' %}" class="btn btn-info">Volver al Listado</a><br><br>
+                <a href="{% url 'Inventario_list' %}" class="btn btn-info">Volver al Listado</a><br><br>
             </div>
         </div>
     </div>

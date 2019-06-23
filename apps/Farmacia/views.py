@@ -173,6 +173,40 @@ class MedicamentoDelete(DeleteView):
     template_name = "medicamento/medicamento_delete.html"
     context_object_name = "medicamento"
 
+    ###INVENTARIO XD
+class InventarioList(ListView):
+    model = Medicamento
+    template_name = "Inventario/Inventario_list.html"
+    context_object_name = "medicamentos"
+    paginate_by = 10
+
+class InventarioDetail(DetailView):
+    model = Medicamento
+    template_name = "Inventario/Inventario_detail.html"
+    context_object_name = "medicamento"
+
+class InventarioCreate(CreateView):
+    model = Medicamento
+    form_class = MedicamentoForm
+    success_url = reverse_lazy("Inventario_list")
+    template_name = "Inventario/Inventario_new.html"
+
+class InventarioUpdate(UpdateView):
+    model = Medicamento
+    form_class = MedicamentoForm
+    success_url = reverse_lazy("Inventario_list")
+    template_name = "Inventario/Inventario_update.html"
+
+class InventarioDelete(DeleteView):
+    model = Medicamento
+    success_url = reverse_lazy("Inventario_list")
+    template_name = "Inventario/Inventario_delete.html"
+    context_object_name = "medicamento"
+
+
+
+
+###TIPO MEDICAMENTO
 class TipoMedicamentoList(ListView):
     model = TipoMedicamento #recordar importar modelo de TipoMedicamento
     template_name = "tipo_medicamento/tipo_medicamento_list.html"

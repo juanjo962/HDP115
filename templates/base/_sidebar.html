@@ -32,7 +32,7 @@
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-medkit"></i> <span>Gestion de Medicamentos</span>
+                        <i class="fa fa-medkit"></i> <span>Gestión de Medicamentos</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
@@ -58,30 +58,30 @@
                 </li>
                 <li>
                     <a href="{% url 'venta' %}">
-                        <i class="fa fa-table"></i> <span>Venta de Medicamentos</span>
+                        <i class="fa fa-table"></i> <span> Venta de Medicamentos</span>
                     </a>
                 </li>
-
+               
                 <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-group"></i> <span>Inventario</span>
+                        <a href="#">           
+                            <i class="fa fa-medkit"></i> <span> Inventario </span>             
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li>
-                                <a href="{% url 'farmacia_index' %}">
-                                    <i class="fa fa-info-circle"></i> Estadisticas
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li>
+                                    <a href="{% url 'Inventario_list' %}">
+                                    <i class="fa fa-hospital-o"></i> Inventario
+                                    </a>
+                                </li>
+                            </ul>
+                       
                      <!--juanjo-->
                 {% if request.user.is_superuser %}
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-user"></i> <span>Gestion de Usuarios</span>
+                        <i class="fa fa-user"></i> <span>Gestión de Usuarios</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>

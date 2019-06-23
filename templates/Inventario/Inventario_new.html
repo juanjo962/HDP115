@@ -34,10 +34,17 @@ Cree un nuevo Medicamento
 
                 {{form.nombre.errors}}
                 <label for="">{{ form.nombre.label }}</label>
-                {{form.nombre}}         
+                {{form.nombre}}
+
                 {{form.precio.errors}}
                 <label for="">{{ form.precio.label }}</label>
                 {{form.precio}}
+
+                {{form.existencia.errors}}
+                <label for="">{{ form.existencia.label }}</label>
+                {{form.existencia}}
+
+                
                 {{form.id_presentacion.errors}}
                 <label for="">{{ form.id_presentacion.label }}</label>
                 {{form.id_presentacion}}
@@ -48,7 +55,7 @@ Cree un nuevo Medicamento
                 
                 <br>
                 <input class="btn btn-success col-md-5" type="submit" value="Crear"/> 
-                <a href="{% url 'medicamento_list' %}" class="btn btn-info pull-right col-md-5">Regresar al listado</a>
+                <a href="{% url 'Inventario_list' %}" class="btn btn-info pull-right col-md-5">Regresar al listado</a>
             </form>
         </div>
     </div>    

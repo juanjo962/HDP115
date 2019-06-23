@@ -34,6 +34,21 @@ urlpatterns = [
     # Eliminar Tipo de Medicamento
     path("medicamento/delete/<int:pk>", views.MedicamentoDelete.as_view(), name="medicamento_delete"),
 
+##############################################################################################################
+#### URLS PARA EL INVENTARIO
+ # URLS Para los Medicamentos
+    # Listar Tipos de Medicamentos
+    path("Inventario/list", views.InventarioList.as_view(), name="Inventario_list"),
+    # Detalle de Medicamento
+    path("Inventario/info/<int:pk>", views.InventarioDetail.as_view(), name="Inventario_detail"),
+    # Crear Tipo de Medicamento
+    path("Inventario/new", views.InventarioCreate.as_view(), name="Inventario_create"),
+    # Editar Tipo de Medicamento
+    path("Inventario/edit/<int:pk>", views.InventarioUpdate.as_view(), name="Inventario_update"),
+    # Eliminar Tipo de Medicamento
+    path("Inventario/delete/<int:pk>", views.InventarioDelete.as_view(), name="Inventario_delete"),
+
+
     #############################################################################################################
     # Listar Tipos de Medicamentos
     path("tipo-medicamentos/list", views.TipoMedicamentoList.as_view(), name="tipo_medicamentos_list"),

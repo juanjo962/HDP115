@@ -58,7 +58,7 @@ class Medicamento(models.Model):
     id_medicamento = models.AutoField(db_column='ID_MEDICAMENTO', primary_key=True)  # Field name made lowercase.
     id_presentacion = models.ForeignKey('Presentacion', models.PROTECT, db_column='ID_PRESENTACION')  # Field name made lowercase.
     id_tipo = models.ForeignKey('TipoMedicamento', models.PROTECT, db_column='ID_TIPO')  # Field name made lowercase.
-    existencia= models.IntegerField(db_column='existencia', blank=True, null=True) 
+    existencia= models.IntegerField(db_column='EXISTENCIA', blank=True, null=True) 
     nombre = models.TextField(db_column='NOMBRE')  # Field name made lowercase.
     precio = models.FloatField(db_column='PRECIO', default=0)  # Field name made lowercase.
 
@@ -81,3 +81,4 @@ class Venta(models.Model):
 
     class Meta:
         db_table = 'VENTA'
+
