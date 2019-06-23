@@ -40,12 +40,10 @@ function seleccionarMedicamento(id){
             '<td>'+medicamento.nombre+'</td>'+
             '<td id="precioUnitario">'+parseFloat(medicamento.precio)+'</td>'+
 
-            //arreglar parametro de id
-            '<td id="cantidad"><input style="width: 50px" id="canti'+medicamento.id_medicamento+'"  type="number" value="1" oninput="calcular('+medicamento.id_medicamento+')" pattern="^[0-9]+" min="1"></td>'+
+            '<td id="cantidad"><input style="width: 50px" id="canti'+medicamento.id_medicamento+'"  type="number" oninput="calcular('+medicamento.id_medicamento+')" pattern="^[0-9]+" min="1"></td>'+
 
-            '<td id="descuento" value="">'+'0'+'</td>'+
             '<td id="subtotal'+medicamento.id_medicamento+'" class="subtotal"></td>'+
-            '<td class="btn btn-danger btn-sm" onclick="eliminarMedicamento('+ medicamento.id_medicamento +')">Eliminar</td>'+
+            '<td id="eli" class="btn btn-danger btn-sm" onclick="eliminarMedicamento('+ medicamento.id_medicamento +')">Eliminar</td>'+
             '</tr>');
         });
     }).fail(function(){
@@ -72,7 +70,6 @@ function calcular(elemento){
     
 }
 
-
 function eliminarMedicamento(id){
     var fila = $("#"+id);
     fila.remove();
@@ -85,4 +82,5 @@ function clearTablaMedicamentos(){
     total = $('#tablaVentas > tfoot > tr > td.totalVenta');
     total.child().remove();
 }
+
 </script>

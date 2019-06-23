@@ -1,0 +1,14 @@
+
+<script src="../../../static/jspdf.min.js"></script>
+<script>
+function ReportePDF() {
+    var nombre = "reporte";
+    var pdf = new jsPDF('p', 'pt', 'letter'); 
+    html = $('#Treporte').html();
+    specialElementHandlers = {};
+    margins = {top: 10,bottom: 20,left: 20,width: 522};
+    pdf.fromHTML(html, margins.left, margins.top, {'width': margins.width},function (dispose) {pdf.save(nombre+'.pdf');}, margins);
+}
+
+
+</script>
