@@ -47,7 +47,7 @@ Puede editar las existencias de los Medicamentos
                             
                             <a class="btn btn-success" href="{% url 'Inventario_detail' medicamento.id_medicamento %}" role="button">Mas Detalles</a> &nbsp&nbsp
                             <a class="btn btn-primary" href="{% url 'Inventario_update' medicamento.id_medicamento %}" role="button">Editar</a> &nbsp&nbsp 
-                            <a class="btn btn-danger" href="{% url 'Inventario_delete' medicamento.id_medicamento %}" role="button">Eliminar</a>
+                            
                         </td>
                     </tr>
                 {% endfor %}

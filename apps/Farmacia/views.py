@@ -202,7 +202,7 @@ class InventarioDelete(DeleteView):
     success_url = reverse_lazy("Inventario_list")
     template_name = "Inventario/Inventario_delete.html"
     context_object_name = "medicamento"
-
+    
 
 
 
@@ -258,3 +258,16 @@ class PresentacionDelete(DeleteView):
     success_url = reverse_lazy("presentacion_list")
     template_name = "presentacion/presentacion_delete.html"
     context_object_name = "presentacion"
+
+
+
+
+
+
+
+
+
+
+
+
+

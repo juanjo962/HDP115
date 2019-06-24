@@ -30,7 +30,7 @@ Edite el medicamento seleccionado
                 {% csrf_token %}
                 
                 {% comment %} {{form.tipo.errors}}
-                <label for="" class="">{{form.tipo.label}}</label>
+                <label for="" class="" disabled>{{form.tipo.label}}</label>
                 {{form.tipo.widget}} {% endcomment %}
                 
                 {{form.nombre.errors}}

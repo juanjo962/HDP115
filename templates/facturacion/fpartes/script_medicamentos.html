@@ -1,4 +1,6 @@
 <script>
+    var exis;
+    var id;
 function listarMedicamentos(){
     $('#modalChooseMedicamentos').modal('show');
     url = "{% url 'api_obtener_medicamentos' %}"
@@ -53,9 +55,24 @@ function seleccionarMedicamento(id){
     }).always(function(){
         console.log("complete");
         calcular();
+        existencia();
     });    
 }
-
+function exixtencia(elemento){
+    var sum = 0.0;
+    $('#tablaVentas > tbody  > tr').each(function () {
+        var qty = parseInt(document.getElementById("canti"+elemento).value);
+        var price = $(this).find('#precioUnitario').text().replace(/[^\d.]/, '');
+        var amount = (qty * price);
+        sum += amount;
+        $(this).find('#subtotal'+elemento).text(amount.toFixed(2));   
+    });
+  
+    //just update the total to sum
+    //Corregir suma total
+    $('#tablaVentas > tfoot > tr > td.totalVenta').text(sum.toFixed(2));
+    
+}
 function calcular(elemento){
     var sum = 0.0;
     $('#tablaVentas > tbody  > tr').each(function () {
