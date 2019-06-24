@@ -34,23 +34,21 @@ Realice procesos de venta
         </div>
     </div><br>
     <button type="button" class="btn btn-primary" onclick="listarMedicamentos();">Agregar Medicamento</button><br>
-    <div class="row">
+    <div class="row" id="Treporte">
         <table class="table table-bordered table-hover table-responsive" id="tablaVentas">
             <thead class="thead-default">
                 <tr>
                     <th>Medicamento</th>
                     <th>Precio Unitario</th>
                     <th>Cantidad</th>
-                    <th>Descuento</th>
                     <th>Subtotal</th>
-                    <th>Acciones</th>
+                    <th id="eli">Acciones</th>
                 </tr>
                 </thead>
                 <tbody id="lineaDeVenta">
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td></td>
                         <td></td>
                         <td></td>
                         <td><label for="" class="form-group">Total Venta:</label></td>
@@ -60,7 +58,8 @@ Realice procesos de venta
         </table>
         <div class="row">
             <div class="col-md-3">
-                <button type="button" name="guardarVenta" id="guardarVenta" class="btn btn-success" onclick="actualizarinventario()">Guardar Venta</button>
+                <button type="button" name="guardarVenta" id="guardarVenta" class="btn btn-success" onclick="ReportePDF()">Guardar Venta</button>
+
                 {% comment %} <button type="button" name="limpiarTabla" id="limpiarTabla" class="btn btn-danger" onclick="clearTablaMedicamentos();">Limpiar</button> {% endcomment %}
             </div>
         </div>
@@ -97,38 +96,12 @@ Realice procesos de venta
         </div>
     </div>
 </div>
-
-
- 
-<p id="pa"></p>
-
+<p id="pp">ss</p>
 {% endblock content %}
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 {% block extra_foot %}
 {% include "facturacion/fpartes/script_set_data.html" %}
 {% include "facturacion/fpartes/script_medicamentos.html" %}
+{% include "facturacion/fpartes/script_reporte.html" %}
 {% endblock extra_foot %}
