@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'HDP115Farmacia.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'h1',
+        'NAME': 'hdp115',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': '127.0.0.1',
