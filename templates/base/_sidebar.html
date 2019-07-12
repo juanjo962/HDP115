@@ -28,7 +28,7 @@
                 <li>
                     <a href="{% url 'farmacia_index' %}">
                         <i class="fa fa-home"></i> <span>Pagina Principal</span>
-                    </a>
+                    </a> 
                 </li>
                 <li class="treeview">
                     <a href="#">
@@ -62,38 +62,19 @@
                     </a>
                 </li>
                
-                <li class="treeview">
-                        <a href="#">           
-                            <i class="fa fa-medkit"></i> <span> Inventario </span>             
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li>
-                                    <a href="{% url 'Inventario_list' %}">
-                                    <i class="fa fa-hospital-o"></i> Inventario
-                                    </a>
-                                </li>
-                            </ul>
+                
+                <li>
+                        <a href="{% url 'Inventario_list' %}">
+                            <i class="fa fa-hospital-o"></i> Inventario
+                        </a>
+                </li>
                        
                      <!--juanjo-->
                 {% if request.user.is_superuser %}
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-user"></i> <span>Gestión de Usuarios</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
+                <li>
+                    <a href="{% url 'user_list' %}">
+                        <i class="fa fa-table"></i> <span> Gestion Usuarios</span>
                     </a>
-                    <ul class="treeview-menu">
-                        <li>
-                            <a href="{% url 'user_list' %}">
-                                <i class="fa fa-user-o"></i> Usuarios
-                            </a>
-                        </li>
-                    </ul>
-
                 </li>
                 {% else %}
                 {% endif %}
