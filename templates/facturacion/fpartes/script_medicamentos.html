@@ -1,6 +1,8 @@
 <script>
-    var exis;
-    var id;
+
+var exis;
+var id;
+
 function listarMedicamentos(){
     $('#modalChooseMedicamentos').modal('show');
     url = "{% url 'api_obtener_medicamentos' %}"
@@ -12,11 +14,12 @@ function listarMedicamentos(){
         var filas = $('#modalChooseMedicamentosBodyTable');
         filas.empty();
         $.each(medicamentos, function(key, medicamentos){
-            console.log(medicamentos.id_medicamento)
+            console.log(medicamentos.id_medicamento);
             filas.append('<tr onclick="seleccionarMedicamento('+medicamentos.id_medicamento+')">'+
             '<td>'+medicamentos.nombre+'</td>'+
             '<td>'+medicamentos.precio+'</td>'+
-            '</tr>');
+            '<td>'+medicamentos.id_tipo+'</td>'+
+            '</tr>');   
         });
     }).fail(function(){
         console.log("error");
@@ -27,7 +30,7 @@ function listarMedicamentos(){
 
 
 function seleccionarMedicamento(id){
-    var filas = $('#lineaDeVenta')
+    var filas = $('#linea');
     $('#modalChooseMedicamentos').modal('hide');
     url = "{% url 'api_seleccionar_medicamento' %}";
     $.ajax({
@@ -35,31 +38,42 @@ function seleccionarMedicamento(id){
         type: "GET",
         data: {"id":id},
     }).done(function(medicamento){
-        var filas = $('#lineaDeVenta');
+        var filas = $('#linea');
+        var filborrar =$('#bor');
+        var cantidad = parseInt(document.getElementById('cantidad').value);
         $.each(medicamento, function(key, medicamento){
+            
             console.log(medicamento.id_medicamento)
+            var subtotal = parseFloat(medicamento.precio) * cantidad;
+
             filas.append('<tr id="'+ medicamento.id_medicamento +'">'+
-            '<td>'+medicamento.nombre+'</td>'+
-            '<td id="precioUnitario">'+parseFloat(medicamento.precio)+'</td>'+
+            '<td id="Medicamento" class="medicamento">'+medicamento.nombre+'</td>'+
+            
+            '<td id="Cantidad'+medicamento.id_medicamento+' class="cantidad"><input id="ca'+medicamento.id_medicamento+'" hidden="true" value="'+cantidad+'"></input>'+cantidad+'</td>'+
+            
+            '<td id="precioUnitario'+ medicamento.id_medicamento +' clas="preciounitario">$ '+parseFloat(medicamento.precio).toFixed(2)+'</td>'+
 
-            '<td id="cantidad"><input style="width: 50px" id="canti'+medicamento.id_medicamento+'"  type="number" oninput="calcular('+medicamento.id_medicamento+')" pattern="^[0-9]+" min="1"></td>'+
+            '<td id="subTotal'+medicamento.id_medicamento+'" class="subtotal"><input id="sub'+medicamento.id_medicamento+'" hidden="true" value="'+subtotal.toFixed(2)+'"></input>$'+subtotal.toFixed(2)+'</td>'+
 
-            '<td id="subtotal'+medicamento.id_medicamento+'" class="subtotal"></td>'+
-            '<td id="eli" class="btn btn-danger btn-sm" onclick="eliminarMedicamento('+ medicamento.id_medicamento +')">Eliminar</td>'+
+            '<td id="Eliminar "class="eliminar"> <button onclick="eliminarMedicamento('+medicamento.id_medicamento+')" type=" button" class="btn btn-light" style="padding-left: 0rem; padding-right: 0rem; padding-top: 0.0rem; padding-bottom: 0rem; border-left-width: 0px; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px"><i class="fa fa-trash" aria-hidden="true"></i></td>'+
             '</tr>');
-        });
+        calcular(medicamento.id_medicamento);
+        });      
     }).fail(function(){
         console.log("error");
     }).always(function(){
         console.log("complete");
-        calcular();
-        existencia();
-    });    
+        
+    });
+
 }
+/*
 function exixtencia(elemento){
     var sum = 0.0;
+    var qty = parseFloat(document.getElementById("cantidad"+elemento).value);
+    console.log('aqui si va'+qty);
     $('#tablaVentas > tbody  > tr').each(function () {
-        var qty = parseInt(document.getElementById("canti"+elemento).value);
+        var qty = document.getElementById("cantidad"+elemento);
         var price = $(this).find('#precioUnitario').text().replace(/[^\d.]/, '');
         var amount = (qty * price);
         sum += amount;
@@ -70,34 +84,104 @@ function exixtencia(elemento){
     //Corregir suma total
     $('#tablaVentas > tfoot > tr > td.totalVenta').text(sum.toFixed(2));
     
-}
+}*/
+
+
 function calcular(elemento){
-    var sum = 0.0;
-    $('#tablaVentas > tbody  > tr').each(function () {
-        var qty = parseInt(document.getElementById("canti"+elemento).value);
-        var price = $(this).find('#precioUnitario').text().replace(/[^\d.]/, '');
-        var amount = (qty * price);
-        sum += amount;
-        $(this).find('#subtotal'+elemento).text(amount.toFixed(2));   
-    });
-  
-    //just update the total to sum
-    //Corregir suma total
-    $('#tablaVentas > tfoot > tr > td.totalVenta').text(sum.toFixed(2));
+    console.log('Metodo calcuar :D');
+    var cactual = parseFloat(document.getElementById('cantiactual').value);
+    var mactual = parseFloat(document.getElementById('totalin').value);
+    var tbod = document.getElementById('linea');
+
     
+    var canti = 0;
+    var monto = 0.0;
+    var sumcanti = 0;
+    var summonto = 0.0;
+    
+    $('#linea').each(function () {
+        var nfilas = document.getElementById("linea").rows.length;
+        console.log(nfilas);
+
+        monto = parseFloat(document.getElementById('sub'+elemento).value);
+        summonto = mactual + monto;
+        document.getElementById('totalin').value = summonto;
+        
+
+        canti = parseFloat(document.getElementById('ca'+elemento).value);
+        sumcanti = cactual + canti;
+        document.getElementById('cantiactual').value = sumcanti;
+    });
+
+    document.getElementById('total').innerHTML = summonto.toFixed(2); 
+    document.getElementById('articulos').innerHTML = sumcanti; 
+
 }
 
-function eliminarMedicamento(id){
-    var fila = $("#"+id);
+function eliminarMedicamento(elemento){
+    var cactual = parseFloat(document.getElementById('cantiactual').value);
+    var mactual = parseFloat(document.getElementById('totalin').value);
+    var tbod = document.getElementById('linea');
+
+    
+    var canti = 0;
+    var monto = 0.0;
+    var sumcanti = 0;
+    var summonto = 0.0;
+    
+    $('#linea').each(function () {
+        var nfilas = document.getElementById("linea").rows.length;
+        console.log(nfilas);
+
+        monto = parseFloat(document.getElementById('sub'+elemento).value);
+        summonto = mactual - monto;
+        document.getElementById('totalin').value = summonto;
+        
+
+        canti = parseFloat(document.getElementById('ca'+elemento).value);
+        sumcanti = cactual - canti;
+        document.getElementById('cantiactual').value = sumcanti;
+       
+    });
+    document.getElementById('total').innerHTML = summonto.toFixed(2); 
+    document.getElementById('articulos').innerHTML = sumcanti;
+
+    var fila = $("#"+elemento);
+    var bteli = $("#eli"+elemento);
     fila.remove();
-    calcular();
+    bteli.remove();
+    calcular(id);
 }
 
 function clearTablaMedicamentos(){
-    tabla = $('#tablaVentas > tbody#lineaDeVenta > tr');
+    alert('Venta realizada con exito');
+    document.getElementById('total').innerHTML = 0.00; 
+    document.getElementById('articulos').innerHTML = 0;
+    tabla = $('#tfactura > tbody#linea > tr');
     tabla.remove();
-    total = $('#tablaVentas > tfoot > tr > td.totalVenta');
+    total = $('#tfactura > tfoot > tr > td.total');
     total.child().remove();
-}
 
+}
+function vali(e){
+    key=e.keyCode || e.which;
+
+    teclado=String.fromCharCode(key);
+
+    numeros="123456789";
+
+    especiales="8-37-38-46";
+
+    teclado_especial=false;
+
+    for (var i in especiales) {
+        if(key==especiales[i]){
+            teclado_especial=true;
+        }
+    }
+    if(numeros.indexOf(teclado)==-1 && !teclado_especial){
+        return false;
+    }
+
+}
 </script>

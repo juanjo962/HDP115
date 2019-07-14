@@ -1,14 +1,15 @@
+<script type="text/javascript" src="../../../static/jspdf.min.js"></script>
 
-<script src="../../../static/jspdf.min.js"></script>
-<script>
-function ReportePDF() {
-    var nombre = "reporte";
-    var pdf = new jsPDF('p', 'pt', 'letter'); 
-    html = $('#Treporte').html();
+<script type="text/javascript">
+	function ReportePDF() {
+    var pdf = new jsPDF('p', 'pt', 'letter');
+    var nombre = "tfactura"; 
+    html = $('#tfactura').html();
     specialElementHandlers = {};
-    margins = {top: 10,bottom: 20,left: 20,width: 522};
+
+    margins = {top: 50,bottom: 20,left: 50,rigth: 50, width: 600};
+
     pdf.fromHTML(html, margins.left, margins.top, {'width': margins.width},function (dispose) {pdf.save(nombre+'.pdf');}, margins);
+    clearTablaMedicamentos();    
 }
-
-
 </script>

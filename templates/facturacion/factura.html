@@ -22,7 +22,9 @@ Realice procesos de venta
 
 {% block content %}
 <div class="container-fluid">
-    <div class="row">
+    
+
+    <div class="row" id="inf">
         <div class="col-md-6">
             <label for="" class="form-group">Fecha:</label>
             <input type="text" id="date" class="form-control" value="" readonly>
@@ -32,39 +34,118 @@ Realice procesos de venta
             <input type="text" id="user" class="form-control" value="" readonly>
             <input type="hidden" id="id_user" value="">
         </div>
-    </div><br>
-    <button type="button" class="btn btn-primary" onclick="listarMedicamentos();">Agregar Medicamento</button><br>
-    <div class="row" id="Treporte">
-        <table class="table table-bordered table-hover table-responsive" id="tablaVentas">
-            <thead class="thead-default">
-                <tr>
-                    <th>Medicamento</th>
-                    <th>Precio Unitario</th>
-                    <th>Cantidad</th>
-                    <th>Subtotal</th>
-                    <th id="eli">Acciones</th>
-                </tr>
-                </thead>
-                <tbody id="lineaDeVenta">
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td><label for="" class="form-group">Total Venta:</label></td>
-                        <td class="totalVenta"></td>
-                    </tr>
-                </tfoot>
-        </table>
-        <div class="row">
-            <div class="col-md-3">
-                <button type="button" name="guardarVenta" id="guardarVenta" class="btn btn-success" onclick="ReportePDF()">Guardar Venta</button>
+    </div><br> 
+    <br>
+    
 
-                {% comment %} <button type="button" name="limpiarTabla" id="limpiarTabla" class="btn btn-danger" onclick="clearTablaMedicamentos();">Limpiar</button> {% endcomment %}
-            </div>
+    <div class="row">
+        <div class="form-group col-md-1">
+            <span class="input-group-text" id="inputGroup-sizing-default"><b>Cantidad:</b></span>
+        </div>
+
+        <div class="form-group col-md-2">
+            <input style="width: 80px" value="1" name="Cantidad" type="number" class="form-control" pattern="-?[0-9]*(\+)?" min="1" id="cantidad" maxlength="4" aria-label="Default" aria-describedby="inputGroup-sizing-default" onkeypress="return vali(event)">
+        </div>
+        <div class="col-md-4">
+            <button type="button" class="btn btn-primary" onclick="listarMedicamentos()">Agregar Medicamento</button>
         </div>
     </div>
+
+
+    <div class="row" >
+        <div class="col-md-11">
+                <table  id="tfactura" class="table table-bordered table-hover table-responsive"> 
+                    <thead>
+                        <tr border="3">
+                            <th scope="col">Medicamento</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Precio_unitario</th>
+                            <th scope="col">Subtotal</th>
+                            <th scope="col"><i id="borrar" class="fa fa-trash" aria-hidden="true"></i></th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="linea">
+                    </tbody>
+                    
+                    <tfoot>
+                        <tr>
+                            <th scope="col" class="tot">
+                                Total artículos:<input id="cantiactual" hidden="true" value="0">
+                            </th>
+                            <th id="articulos" scope="col" clas="arti">0</th>
+                            <th scope="col">
+                                Monto Total:<input id="totalin" hidden="true" value="0.00">
+                            </th>
+                            <th id="total" scope="col" class="tota">0.00</th>
+                            <th scope="col" ></th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+<!--
+            <div class="col-md-1">
+                <div class="table-responsive">
+                    <table class="table table-hover table-sm" id="tfactura">
+                        <thead>
+                            <tr>
+                              <th scope="col"><i id="borrar" class="fa fa-trash" aria-hidden="true"></i></th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="bor">
+                        </tbody>
+                        
+                        <thead>
+                            <tr>
+                              <th scope="col"></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+-->
+    </div>
+
+
+
+
+    <div class="row">
+        <div class="col-md-3">
+            <button type="button" name="guardarVenta" id="guardarVenta" class="btn btn-success" onclick="ReportePDF()">Guardar Venta</button>
+
+            {% comment %} <button type="button" name="limpiarTabla" id="limpiarTabla" class="btn btn-danger" onclick="clearTablaMedicamentos();">Limpiar</button> {% endcomment %}
+        </div>
+    </div>
+
+
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -91,14 +172,14 @@ Realice procesos de venta
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                </div>
+                </div>         
             </div>
         </div>
     </div>
 </div>
-<p id="pp"></p>
-{% endblock content %}
 
+
+{% endblock content %}
 
 {% block extra_foot %}
 {% include "facturacion/fpartes/script_set_data.html" %}
