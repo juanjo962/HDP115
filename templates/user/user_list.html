@@ -1,11 +1,11 @@
 {% extends "base/base.html" %}
 
 {% block title %}
-Gestion de Bodegueros
+Gestion de Usuarios
 {% endblock title %}
 
 {% block page_name %}
-Gestion de Bodegueros
+Gestion de Usuarios
 {% endblock page_name  %} 
 
 {% block page_description %}
@@ -16,7 +16,7 @@ Gestione a sus empleados :usuarios.
     <ul class="breadcrumb">
         <li><a href="{% url 'index' %}">Inicio</a></li>
         <li><a>Farmacia</a></li>
-        <li class="active"><a>Bodegueros</a></li>
+        <li class="active"><a>Usuarios</a></li>
     </ul>
 {% endblock breadcrumbs %}
 
@@ -28,7 +28,6 @@ Gestione a sus empleados :usuarios.
         <table class="table table-hover table-bordered">
             <tr>
                 <td>
-                        <a href="{% url 'user2_list' %}" class="btn btn-primary pull-left">Ver Bodegueros</a>
                     </td>
              </tr>
 

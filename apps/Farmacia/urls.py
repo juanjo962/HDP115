@@ -10,14 +10,11 @@ urlpatterns = [
     # URLS Para los Presentacion de usuarios
     
     #juanjo listar usuarios tipo vendedores
-    path('user/list', views.UserListView, name='user_list'),
-    #juanjo listar usuarios tipo bodegueros
-    path('user/listt', views.UserListView2, name='user2_list'),
+    path('user/list', views.UserListView.as_view(), name='user_list'),
     #juanjo crear usuarios
     path("user/new", views.UserCreate, name="user_create"),
     #detalle usuarios
      path('user/edit/', views. PasswordChangeView.as_view(), name="edit_pass"),
-   
     path('user/info/<int:pk>', views.UserDetail.as_view(), name="user_detail"),
     #delete usuarios
      path('user/delete/<int:pk>', views.UserDelete.as_view(), name="user_delete"),
@@ -75,5 +72,6 @@ urlpatterns = [
     path('venta/', views.VentaTemplate.as_view(), name='venta'),
     path('api/obtener_medicamentos', views.obtener_medicamentos, name="api_obtener_medicamentos"),
     path('api/seleccionar_medicamento', views.seleccionar_medicamento, name="api_seleccionar_medicamento"),
+    
 
 ]
