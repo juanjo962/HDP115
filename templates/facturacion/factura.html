@@ -13,6 +13,7 @@ Realice procesos de venta
 {% endblock page_description %}
 
 {% block breadcrumbs %}
+
     <ul class="breadcrumb">
         <li><a href="{% url 'farmacia_index' %}">Inicio</a></li>
         <li><a>Farmacia</a></li>
@@ -21,134 +22,98 @@ Realice procesos de venta
 {% endblock breadcrumbs %}
 
 {% block content %}
-<div class="container-fluid">
-    
 
+<div class="container-fluid">
     <div class="row" id="inf">
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <label for="" class="form-group">Fecha:</label>
             <input type="text" id="date" class="form-control" value="" readonly>
         </div>
-        <div class="col-md-6">
+        <div class="col-sm-6">
             <label for="" class="form-group">Vendedor:</label>
             <input type="text" id="user" class="form-control" value="" readonly>
             <input type="hidden" id="id_user" value="">
         </div>
     </div><br> 
     <br>
-    
-
+<!---------------------Agregar medicamento--------------------------------------------->
     <div class="row">
-        <div class="form-group col-md-1">
+        <div class="form-group col-sm-1">
             <span class="input-group-text" id="inputGroup-sizing-default"><b>Cantidad:</b></span>
         </div>
 
-        <div class="form-group col-md-2">
+        <div class="form-group col-sm-2">
             <input style="width: 80px" value="1" name="Cantidad" type="number" class="form-control" pattern="-?[0-9]*(\+)?" min="1" id="cantidad" maxlength="4" aria-label="Default" aria-describedby="inputGroup-sizing-default" onkeypress="return vali(event)">
         </div>
         <div class="col-md-4">
             <button type="button" class="btn btn-primary" onclick="listarMedicamentos()">Agregar Medicamento</button>
         </div>
-    </div>
-
-
+    </div><br>
+<!--------------------------Factura--------------------------------------------->
     <div class="row" >
-        <div class="col-md-11">
-                <table  id="tfactura" class="table table-bordered table-hover table-responsive"> 
+        <div class="col-sm-10">
+        <div id="facturacion">            
+            <table  id="tfactura" class="table table-bordered table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th scope="col">Medicamento</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Precio unitario</th>
+                        <th scope="col">Subtotal</th>
+                    </tr>
+                </thead>
+                
+                <tbody id="linea">
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <th scope="col" class="tot">Total artículos:</th>
+                        <th id="articulos" scope="col" clas="arti">0</th>
+                        <th scope="col">Monto Total:</th>
+                        <th id="total" scope="col" class="tota">0.00</th>
+                    </tr>
+                </tfoot>
+                
+                <input id="totalin" hidden="true" value="0.00">
+                
+                <input id="cantiactual" hidden="true" value="0">
+            </table>
+        </div>
+        </div>
+    
+        <div class="col-sm-1">
+            <div class="table-responsive">
+                <table class="table table-hover table-sm" id="tfactura">
                     <thead>
-                        <tr border="3">
-                            <th scope="col">Medicamento</th>
-                            <th scope="col">Cantidad</th>
-                            <th scope="col">Precio_unitario</th>
-                            <th scope="col">Subtotal</th>
-                            <th scope="col"><i id="borrar" class="fa fa-trash" aria-hidden="true"></i></th>
+                        <tr>
+                          <th scope="col"><i id="borrar" class="fa fa-trash" aria-hidden="true"></i></th>
                         </tr>
                     </thead>
 
-                    <tbody id="linea">
+                    <tbody id="bor">
                     </tbody>
-                    
-                    <tfoot>
+                        
+                    <thead>
                         <tr>
-                            <th scope="col" class="tot">
-                                Total artículos:<input id="cantiactual" hidden="true" value="0">
-                            </th>
-                            <th id="articulos" scope="col" clas="arti">0</th>
-                            <th scope="col">
-                                Monto Total:<input id="totalin" hidden="true" value="0.00">
-                            </th>
-                            <th id="total" scope="col" class="tota">0.00</th>
-                            <th scope="col" ></th>
+                          <th scope="col"></th>
                         </tr>
-                    </tfoot>
+                    </thead>
                 </table>
             </div>
         </div>
-<!--
-            <div class="col-md-1">
-                <div class="table-responsive">
-                    <table class="table table-hover table-sm" id="tfactura">
-                        <thead>
-                            <tr>
-                              <th scope="col"><i id="borrar" class="fa fa-trash" aria-hidden="true"></i></th>
-                            </tr>
-                        </thead>
-
-                        <tbody id="bor">
-                        </tbody>
-                        
-                        <thead>
-                            <tr>
-                              <th scope="col"></th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
-        </div>
-
--->
     </div>
-
-
-
-
+        <!---------------------Generar reporte--------------------------------------------->
     <div class="row">
         <div class="col-md-3">
             <button type="button" name="guardarVenta" id="guardarVenta" class="btn btn-success" onclick="ReportePDF()">Guardar Venta</button>
-
-            {% comment %} <button type="button" name="limpiarTabla" id="limpiarTabla" class="btn btn-danger" onclick="clearTablaMedicamentos();">Limpiar</button> {% endcomment %}
         </div>
     </div>
 
-
+</div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!----------------------MODAL lista de medicamentos-------------------------------->
 <div class="container">
     <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalChooseMedicamentos" id="modalChooseMedicamentos">
         <div class="modal-dialog" role="document">
@@ -177,7 +142,6 @@ Realice procesos de venta
         </div>
     </div>
 </div>
-
 
 {% endblock content %}
 

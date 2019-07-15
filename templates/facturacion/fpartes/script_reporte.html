@@ -1,15 +1,78 @@
 <script type="text/javascript" src="../../../static/jspdf.min.js"></script>
 
 <script type="text/javascript">
-	function ReportePDF() {
-    var pdf = new jsPDF('p', 'pt', 'letter');
-    var nombre = "tfactura"; 
-    html = $('#tfactura').html();
-    specialElementHandlers = {};
 
-    margins = {top: 50,bottom: 20,left: 50,rigth: 50, width: 600};
-
-    pdf.fromHTML(html, margins.left, margins.top, {'width': margins.width},function (dispose) {pdf.save(nombre+'.pdf');}, margins);
-    clearTablaMedicamentos();    
+function Hora(){
+	var d = new Date();
+	if (d.getHours() <= 12){
+		tiempo = "AM";
+	}
+	else{
+		tiempo = "PM";
+	}
+	h = "Hora de venta: " +d.getHours()+':'+d.getMinutes()+':'+d.getSeconds()+" "+tiempo;
+	return h;
 }
+
+function Fecha(){
+	var d = new Date();
+	f = "Fecha de venta: " + d.getDate() +"/"+ d.getMonth() +"/"+d.getFullYear();
+	return f;
+}
+
+
+function ReportePDF() {
+	var pdf = new jsPDF('p', 'pt', 'letter');
+    //Logo
+
+//Texto
+    fecha = Fecha();
+    hora = Hora();
+
+	pdf.setFontSize(22);
+	pdf.text("Farmacia BIO-GENESIS",100, 60);
+    pdf.setLineWidth(1.5);
+	pdf.line(345, 70, 100, 70);
+
+
+	pdf.setFontSize(12);
+	pdf.text(fecha,100, 90);
+	pdf.setLineWidth(0.5);
+	pdf.line(255, 95, 100, 95);
+	pdf.text(hora,100, 110);
+	pdf.line(255, 115, 100, 115);
+	
+	pdf.text("Descripcion de compra:",100, 150);
+
+
+
+    source = $('#facturacion')[0];
+
+    specialElementHandlers = {
+
+    '#bypassme': function(element, renderer) {
+       
+        return true
+        }
+    };
+    margins = {
+        top: 150,
+        bottom: 60,
+        left: 100,
+        width: 600
+    };
+
+    pdf.fromHTML(
+            source, // HTML string or DOM elem ref.
+            margins.left, // x coord
+            margins.top, {// y coord
+                'width': margins.width, 
+                'elementHandlers': specialElementHandlers
+            },
+    function(dispose) {
+        pdf.save('Reporte.pdf');
+    }
+    , margins);
+}
+
 </script>

@@ -18,7 +18,6 @@ function listarMedicamentos(){
             filas.append('<tr onclick="seleccionarMedicamento('+medicamentos.id_medicamento+')">'+
             '<td>'+medicamentos.nombre+'</td>'+
             '<td>'+medicamentos.precio+'</td>'+
-            '<td>'+medicamentos.id_tipo+'</td>'+
             '</tr>');   
         });
     }).fail(function(){
@@ -54,7 +53,11 @@ function seleccionarMedicamento(id){
             '<td id="precioUnitario'+ medicamento.id_medicamento +' clas="preciounitario">$ '+parseFloat(medicamento.precio).toFixed(2)+'</td>'+
 
             '<td id="subTotal'+medicamento.id_medicamento+'" class="subtotal"><input id="sub'+medicamento.id_medicamento+'" hidden="true" value="'+subtotal.toFixed(2)+'"></input>$'+subtotal.toFixed(2)+'</td>'+
+            '</tr>');
 
+
+
+            filborrar.append('<tr id="b'+ medicamento.id_medicamento +'">'+
             '<td id="Eliminar "class="eliminar"> <button onclick="eliminarMedicamento('+medicamento.id_medicamento+')" type=" button" class="btn btn-light" style="padding-left: 0rem; padding-right: 0rem; padding-top: 0.0rem; padding-bottom: 0rem; border-left-width: 0px; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px"><i class="fa fa-trash" aria-hidden="true"></i></td>'+
             '</tr>');
         calcular(medicamento.id_medicamento);
@@ -147,7 +150,7 @@ function eliminarMedicamento(elemento){
     document.getElementById('articulos').innerHTML = sumcanti;
 
     var fila = $("#"+elemento);
-    var bteli = $("#eli"+elemento);
+    var bteli = $("#b"+elemento);
     fila.remove();
     bteli.remove();
     calcular(id);
@@ -165,15 +168,10 @@ function clearTablaMedicamentos(){
 }
 function vali(e){
     key=e.keyCode || e.which;
-
     teclado=String.fromCharCode(key);
-
-    numeros="123456789";
-
+    numeros="0123456789";
     especiales="8-37-38-46";
-
     teclado_especial=false;
-
     for (var i in especiales) {
         if(key==especiales[i]){
             teclado_especial=true;
@@ -182,6 +180,5 @@ function vali(e){
     if(numeros.indexOf(teclado)==-1 && !teclado_especial){
         return false;
     }
-
 }
 </script>
